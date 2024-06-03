@@ -1,13 +1,16 @@
 //server.js
+require('dotenv').config()
 
 const express = require('express');
 const { MongoClient , ObjectId } = require('mongodb');
 
-const app = express();
-const port = 3000;
 
+
+const app = express();
+const port = process.env.PORT || 3000;
+console.log(process.env.MONGO_URL)
 // MongoDB Atlas connection string
-const url = 'mongodb+srv://yuva_aj:www.yuvi.com@cluster0.kpkb4fi.mongodb.net/';
+const url = process.env.MONGO_URL ;
 
 app.use(express.json());
 
