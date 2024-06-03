@@ -36,7 +36,8 @@ pipeline {
             steps {
                 // Use Jenkins credentials for secure access
                 sshagent(['agent1']) {
-                    sh "scp -r . ${DEPLOY_USER}@${DEPLOY_SERVER}:${DEPLOY_PATH}"
+                    // sh "scp -r . ${DEPLOY_USER}@${DEPLOY_SERVER}:${DEPLOY_PATH}"
+                    sh "scp -r . ubuntu@10.187.70.106:/home/ubuntu/jenkins/express-app"
                 }
             }
         }
