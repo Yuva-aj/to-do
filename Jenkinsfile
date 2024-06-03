@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent{
+        label 'agent1'
+    }
 
     tools {
         nodejs 'NodeJS 20.14.0' // Ensure this matches the name you configured in Jenkins
@@ -14,14 +16,14 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git url: 'https://github.com/Yuva-aj/to-do/', branch: 'main' // Specify the branch if it's not the default branch
+                git 'https://github.com/Yuva-aj/to-do/' // Specify the branch if it's not the default branch
             }
         }
-        stage('Install Dependencies') {
-            steps {
-                sh 'npm install'
-            }
-        }
+        // stage('Install Dependencies') {
+        //     steps {
+        //         sh 'npm install'
+        //     }
+        // }
         // stage('Run Tests') {
         //     steps {
         //         sh 'npm test'
@@ -32,14 +34,14 @@ pipeline {
         //         sh 'npm run build' // If you have a build script
         //     }
         // }
-        stage('Deploy') {
-            steps {
-                // Use Jenkins credentials for secure access
-                sshagent(['agent1']) {
-                    // sh "scp -r . ${DEPLOY_USER}@${DEPLOY_SERVER}:${DEPLOY_PATH}"
-                    sh "scp -r . ubuntu@10.187.70.106:/home/ubuntu/jenkins/express-app"
-                }
-            }
-        }
+        // stage('Deploy') {
+        //     steps {
+        //         // Use Jenkins credentials for secure access
+        //         sshagent(['agent1']) {
+        //             // sh "scp -r . ${DEPLOY_USER}@${DEPLOY_SERVER}:${DEPLOY_PATH}"
+        //             sh "scp -r . ubuntu@10.187.70.106:/home/ubuntu/jenkins/express-app"
+        //         }
+        //     }
+        // }
     }
 }
